@@ -82,4 +82,17 @@ FROM Employee
 LEFT JOIN Project ON Employee.EmployeeID = Project.EmployeeID;
 
 /*--------------------------------------------------------------RIGHT JOIN--------------------------------------------------------------*/
-/*Returns all recors from the left table and also those records which satisfy the condition from the right table*/
+/*Same as left join, just opposite*/
+SELECT Employee.EmployeeName, Employee.EmployeeSurname, Project.ProjectID, Project.ProjectName
+FROM Employee
+RIGHT JOIN Project ON Employee.EmployeeID = Project.EmployeeID;
+
+/*--------------------------------------------------------------FULL JOIN--------------------------------------------------------------*/
+/*Returns all records which either have a matching values in the left table or the right table*/
+SELECT Employee.EmployeeName, Employee.EmployeeSurname, Project.ProjectID
+FROM Employee
+LEFT JOIN Project ON Employee.EmployeeID = Project.EmployeeID
+UNION /*HAS A KEYWORD UNION IN BETWEEN BOTH TABLES*/
+SELECT Employee.EmployeeName, Employee.EmployeeSurname, Project.ProjectID
+FROM Employee
+RIGHT JOIN Project ON Employee.EmployeeID = Project.EmployeeID;
