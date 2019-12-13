@@ -1,58 +1,79 @@
-USE EUROLEAGUE
-GO
-
-/*1 EXERCISE*/
-/*Write a query to display all teams name.*/
-SELECT teamName
+SELECT teamName																		--/*6.1.1 EXERCISE*/
 FROM Team;
 
-/*2 EXERCISE*/
-/*Write a SQL statement to display players name and surname, who plays in center position (positionID = 3).*/
-SELECT firstname, lastname
+
+
+SELECT firstname, lastname															--/*6.1.2 EXERCISE*/
 FROM Player 
 WHERE positionID = 3;
 
-/*3 EXERCISE*/
-/*Write a SQL query to find all players, who lastname started with the letter 'U'.*/
-SELECT*FROM Player 
+
+
+SELECT*FROM Player																	--/*6.1.3 EXERCISE*/
 WHERE lastname LIKE 'U%';
 
-/*4 EXERCISE*/
-/*Write a SQL statement to display players name and surname, who plays in the ZALGIRIS KAUNAS.*/
-SELECT Player.firstname, Player.lastname, Team.teamName
+
+
+SELECT Player.firstname, Player.lastname, Team.teamName								--/*6.1.4 EXERCISE*/
 FROM Player
 INNER JOIN Team ON Player.playerID=Team.teamID 
 WHERE
   teamName = 'ZALGIRIS KAUNAS';
 
-/*5 EXERCISE*/
-/*Write a SQL statement to find the coach name of all teams. In result to display team name and coach information (firstname and lastname).*/
-SELECT Coach.firstname, Coach.lastname, Team.teamName
+
+
+SELECT Coach.firstname, Coach.lastname, Team.teamName								--/*6.1.5 EXERCISE*/
 FROM Coach
 INNER JOIN Team ON Coach.coachID = Team.coachID;
 
-/*6 EXERCISE*/
-/*Write a SQL statement to find the country of all teams, which it represents.*/
-SELECT Team.teamName, Country.countryName 
+
+
+SELECT Team.teamName, Country.countryName											--/*6.1.6 EXERCISE*/
 FROM Team 
 INNER JOIN Country ON Team.countryID = Country.countryID
 
-/*7 EXERCISE*/
-/*Write a SQL statement to find the number of teams participating in the Euroleague.*/
-SELECT COUNT(*) FROM Team
 
-/*8 EXERCISE*/
-/*Write a SQL statement to find the number of extra time.*/
-SELECT COUNT(*) FROM Extra_Time
 
-/*9 EXERCISE*/
-/*Write a SQL statement to find out how many times ZALGIRIS KAUNAS plays at home.*/
-SELECT COUNT(*) FROM Game 
+SELECT COUNT(*) FROM Team															--/*6.1.7 EXERCISE*/
+
+
+
+SELECT COUNT(*) FROM Extra_Time														--/*6.1.8 EXERCISE*/
+
+
+
+SELECT COUNT(*) FROM Game															--/*6.1.9 EXERCISE*/
 WHERE Game.homeTeamID = 16
 
-/*10 EXERCISE*/
-/*Write a SQL statement to count points collected by the player (PAULIUS JANKUNAS).*/
-SELECT SUM(Player_performance.points) 
+
+
+SELECT SUM(Player_performance.points)												--/*6.1.10 EXERCISE*/
 FROM Player_performance
 WHERE Player_performance.playerID =
 (SELECT Player.playerID FROM Player WHERE firstname=' PAULIUS' AND lastname='JANKUNAS')
+
+
+/*-----------------------------------------------------------------------------------------------------*/
+
+
+SELECT Player.firstname, Player.lastname, Team.teamName								--/*6.2.1 EXERCISE*/
+FROM Player
+INNER JOIN Player_performance ON Player.playerID = Player_performance.playerID
+INNER JOIN Team ON Player.teamID = Team.teamID
+WHERE points = (SELECT MAX(points) FROM Player_performance)
+
+
+--/*6.2.2 EXERCISE*/
+
+
+
+/*6.2.3 EXERCISE*/
+/*write a query to find the position distribution of players. In result write position and percent.*/
+
+
+/*6.2.4 EXERCISE*/
+/*Write a query to find against teams from Spain playing Zalgiris Kaunas in home arena.*/
+
+
+/*6.2.5 EXERCISE*/
+/*Write a query to find how many times each team plays extra time. In result show team name and number of extra times.*/
