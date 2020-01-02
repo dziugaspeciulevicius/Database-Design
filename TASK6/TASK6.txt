@@ -69,6 +69,10 @@ WHERE points = (SELECT MAX(points) FROM Player_performance)
 
 /*6.2.3 EXERCISE*/
 /*write a query to find the position distribution of players. In result write position and percent.*/
+SELECT Position.positionName, (COUNT * 100.0 / SELECT COUNT(*) FROM Player))
+FROM Position
+INNER JOIN Player ON Position.positionID = Player.positionID
+GROUP BY Position.positionName
 
 
 /*6.2.4 EXERCISE*/
